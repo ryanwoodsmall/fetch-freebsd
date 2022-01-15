@@ -33,6 +33,16 @@
 #ifndef _FETCH_H_INCLUDED
 #define _FETCH_H_INCLUDED
 
+#undef __BEGIN_DECLS
+#undef __END_DECLS
+#ifdef __cplusplus
+# define __BEGIN_DECLS extern "C" {
+# define __END_DECLS }
+#else
+# define __BEGIN_DECLS
+# define __END_DECLS
+#endif
+
 #define _LIBFETCH_VER "libfetch/2.0"
 
 #define URL_SCHEMELEN	16

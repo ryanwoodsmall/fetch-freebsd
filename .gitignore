@@ -1,0 +1,7 @@
+**/core
+**/*.o
+**/*.a
+ftperr.h
+httperr.h
+fetch
+fetch.out

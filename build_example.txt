@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# requires pkg-config, libmd, libbsd, openssl/libressl
+#
+# XXX - https://github.com/ryanwoodsmall/crosware - crosware specific!
+#
+
+sh generate_errors.sh ftp .
+sh generate_errors.sh http .
+
+for i in common fetch file ftp http ; do
+  gcc -g $(pkg-config --cflags libbsd) -I${cwsw}/libressl/current/include -I. -c ${i}.c -o ${i}.o
+done
+
+gcc -g -DALLPERMS=07777 $(pkg-config --cflags libbsd) -I. main.c -o fetch libfetch.a -L${cwsw}/libressl/current/lib -lssl -lcrypto -L${cwsw}/libbsd/current/lib -lbsd -L${cwsw}/libmd/current/lib -lmd -static
