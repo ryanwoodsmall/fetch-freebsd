@@ -12,4 +12,7 @@ for i in common fetch file ftp http ; do
   gcc -g $(pkg-config --cflags libbsd) -I${cwsw}/libressl/current/include -I. -c ${i}.c -o ${i}.o
 done
 
+busybox ar r libfetch.a *.o
+ranlib libfetch.a
+
 gcc -g -DALLPERMS=07777 $(pkg-config --cflags libbsd) -I. main.c -o fetch libfetch.a -L${cwsw}/libressl/current/lib -lssl -lcrypto -L${cwsw}/libbsd/current/lib -lbsd -L${cwsw}/libmd/current/lib -lmd -static
